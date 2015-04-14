@@ -24,27 +24,26 @@ function Configurator(options) {
   this.scale.setRangeElement(options.scaleViewEl);
   this.scale.onValueChange = function(pixelsPerCentimeter) {
     this.workSpace.calculatePictureModulesExtremeScales(pixelsPerCentimeter);
-  }.bind(this) 
+  }.bind(this);
   
   this.workSpace = new WorkSpace();
   this.workSpace.onExtremeScalesChanged = function(minScaleCoefficient, maxScaleCoefficient) {
-    // debugger;
     _this.scale.maxZoomCoefficient = minScaleCoefficient;
     _this.scale.maxDistanceCoefficient = maxScaleCoefficient;
     _this.scale.view.render();
-  }
+  };
 
   this.getPixelsPerCentimeter = function() {
     return this.scale._pixelsPerCentimeter;
-  } 
+  };
+
   this.addPictureModule = function(options) {
-    var pictureModule = this.workSpace.createPictureModule(options, this.getPixelsPerCentimeter()) 
-    
-    this.canvas.add(pictureModule)
-  }
+    var pictureModule = this.workSpace.createPictureModule(options, this.getPixelsPerCentimeter());   
+    this.canvas.add(pictureModule);
+  };
 
   this.canvas.on('object:scaling', function(options) {
     options.target.dimensionsChanged();
-  })
-}
+  });
+};
 

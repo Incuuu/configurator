@@ -7,8 +7,9 @@ function Scale(pixelsPerCentimeter) {
 
   this.changePixelsPerCentimeter = function(value) {
     this._pixelsPerCentimeter = value;
+    // declared in configurator
     this.onValueChange(value);
-    this.view.render();
+    // this.view.render();
   };
 };
 
@@ -22,8 +23,9 @@ function ScaleView(scaleViewEl, model) {
     this.model.changePixelsPerCentimeter(1 / centimetersPerPixel);
   };
 
-  scaleViewEl.addEventListener('change', function() {
-    _this.changeValue(this.value);  
+  scaleViewEl.addEventListener('input', function() {
+    _this.changeValue(this.value);
+    pictureModuleConfigurator.canvas.renderAll();  
   }, false);
 
   this.minValue = function() {

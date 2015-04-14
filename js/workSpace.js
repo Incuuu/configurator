@@ -30,6 +30,7 @@ function WorkSpace() {
   this.calculatePictureModulesExtremeScales = function(pixelsPerCentimeter) {
     for (var i = 0; i < this.pictureModules.length; i++) {
       this.pictureModules[i].calculateExtremeScales(pixelsPerCentimeter);
+      this.pictureModules[i].updateSize();
     };    
   };
 };

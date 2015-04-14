@@ -5,30 +5,25 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     options || (options = { });
     this.callSuper('initialize', options);
     this.calculateExtremeScales();
-    
-    var widthInCentimeters = Math.round(this.width / pictureModuleConfigurator.getPixelsPerCentimeter()),
-        heightInCentimeters = Math.round(this.height / pictureModuleConfigurator.getPixelsPerCentimeter());
-
-    this.set('label', widthInCentimeters + 'см x ' + heightInCentimeters +'см')
-
+    this.updateSize();
   },
 
   calculateExtremeScales: function() {
-    // devide this method, onResize - define maxScales.
-
-    var widthInCentimeters = this.width / pictureModuleConfigurator.getPixelsPerCentimeter(),
-        heightInCentimeters = this.height / pictureModuleConfigurator.getPixelsPerCentimeter(); 
-
-    this.minScaleX = 20 / widthInCentimeters;
-    this.minScaleY = 20 / heightInCentimeters;
+    this.minScaleX = 20 * this.scaleX / this.widthInCentimeters();
+    this.minScaleY = 20 * this.scaleY / this.heightInCentimeters();
     
     this.maxScaleX = this.getMaxDimensionInCentimeters('width') / 
-      widthInCentimeters;
+      this.widthInCentimeters() * this.scaleX;
     
     this.maxScaleY = this.getMaxDimensionInCentimeters('height') /
-      heightInCentimeters;
-    
+      this.heightInCentimeters() * this.scaleY;
   },
+
+  updateSize: function() {
+    this.set('label', Math.round(this.widthInCentimeters() * 10) / 10
+     + 'см x ' + Math.round(this.heightInCentimeters() * 10) / 10 +'см');
+  },
+
   _render: function(ctx) {
     this.callSuper('_render', ctx);
     ctx.font = '20px Helvetica';
@@ -60,16 +55,15 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     return Math.min(this.maxScaleX / this.scaleX, this.maxScaleY / this.scaleY)
   },
 
-  getCurrentWidthInCentimeters: function() {
-    return Math.round(this.width * this.scaleX / pictureModuleConfigurator.getPixelsPerCentimeter());
+  widthInCentimeters: function() {
+    return this.width * this.scaleX / pictureModuleConfigurator.getPixelsPerCentimeter();
   },
 
-  getCurrentHeightInCentimeters: function() {
-    return Math.round(this.height * this.scaleY / pictureModuleConfigurator.getPixelsPerCentimeter());
+  heightInCentimeters: function() {
+    return this.height * this.scaleY / pictureModuleConfigurator.getPixelsPerCentimeter();
   },
 
   dimensionsChanged: function() {
-    // debugger;
     function overrideOverstepedScales() {
       if (this.minScaleY > this.scaleY) {
         this.scaleY = this.minScaleY;
@@ -98,9 +92,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     };
 
     overrideOverstepedScales.apply(this);
-
-    this.set('label', this.getCurrentWidthInCentimeters() + 'см x ' + this.getCurrentHeightInCentimeters() +'см')
-
+    this.updateSize();
     this.onPictureModuleScale && this.onPictureModuleScale();
   }
 });

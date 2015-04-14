@@ -28,14 +28,13 @@ function ScaleView(scaleViewEl, model) {
 
   this.minValue = function() {
     return this.model.maxZoomCoefficient / this.model._pixelsPerCentimeter;
-  }
+  };
 
   this.maxValue = function() {
     return this.model.maxDistanceCoefficient / this.model._pixelsPerCentimeter;
-  }
+  };
 
   this.render = function() {
-    // // debugger;
     this.element.min = this.minValue();
     this.element.max = this.maxValue();
     this.element.step = this.step();
@@ -44,7 +43,7 @@ function ScaleView(scaleViewEl, model) {
 
   this.step = function() {
     return (this.maxValue() - this.minValue()) / this._stepQuantity;
-  }
+  };
 };
 
 

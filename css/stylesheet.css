@@ -1,0 +1,12 @@
+  canvas {
+    border: 1px solid #000;
+  }
+  .canvas-container {
+    display: inline-block;
+  }
+  .settings {
+  	display: inline-block;
+  	width: 300px;
+  	vertical-align: top;
+  }
+  

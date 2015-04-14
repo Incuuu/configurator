@@ -29,8 +29,8 @@ function Configurator(options) {
   this.workSpace = new WorkSpace();
   this.workSpace.onExtremeScalesChanged = function(minScaleCoefficient, maxScaleCoefficient) {
     // debugger;
-    _this.scale.setExtremeValueFromCoefficient('minimum', minScaleCoefficient);
-    _this.scale.setExtremeValueFromCoefficient('maximum', maxScaleCoefficient);
+    _this.scale.maxZoomCoefficient = minScaleCoefficient;
+    _this.scale.maxDistanceCoefficient = maxScaleCoefficient;
     _this.scale.view.render();
   }
 
@@ -52,16 +52,6 @@ function Configurator(options) {
 function Scale(pixelsPerCentimeter) {
   this._pixelsPerCentimeter = pixelsPerCentimeter || 6;
   
-  this.setExtremeValueFromCoefficient = function(type, coefficient) {
-    // debugger;
-    var value = this._pixelsPerCentimeter * coefficient;
-    if (type === 'minimum') {
-      this.minValue = value;
-    }  else if (type === 'maximum') {
-      this.maxValue = value;
-    }
-  };
-
   this.setRangeElement = function(element) {
     this.view = new ScaleView(element, this);
   }
@@ -79,24 +69,32 @@ function ScaleView(scaleViewEl, model) {
   this.model = model;
   this._stepQuantity = 200;
 
-  this.changeValue = function(value) {
-    this.model.changePixelsPerCentimeter(value);
+  this.changeValue = function(centimetersPerPixel) {
+    this.model.changePixelsPerCentimeter(1 / centimetersPerPixel);
   };
 
   scaleViewEl.addEventListener('change', function() {
     _this.changeValue(this.value);  
   }, false);
 
+  this.minValue = function() {
+    return this.model.maxZoomCoefficient / this.model._pixelsPerCentimeter;
+  }
+
+  this.maxValue = function() {
+    return this.model.maxDistanceCoefficient / this.model._pixelsPerCentimeter;
+  }
+
   this.render = function() {
     // // debugger;
-    this.element.min = this.model.minValue;
-    this.element.max = this.model.maxValue;
-    this.element.step = this.calculateStep();
-    this.element.value = this.model._pixelsPerCentimeter;
+    this.element.min = this.minValue();
+    this.element.max = this.maxValue();
+    this.element.step = this.step();
+    this.element.value = 1 / this.model._pixelsPerCentimeter;
   };
 
-  this.calculateStep = function() {
-    return (this.model.maxValue - this.model.minValue) / this._stepQuantity;
+  this.step = function() {
+    return (this.maxValue() - this.minValue()) / this._stepQuantity;
   }
 };
 
@@ -116,6 +114,12 @@ function WorkSpace() {
         options || (options = { });
         this.callSuper('initialize', options);
         this.calculateExtremeScales();
+        
+        var widthInCentimeters = Math.round(this.width / pictureModuleConfigurator.getPixelsPerCentimeter()),
+            heightInCentimeters = Math.round(this.height / pictureModuleConfigurator.getPixelsPerCentimeter());
+
+        this.set('label', widthInCentimeters + 'см x ' + heightInCentimeters +'см')
+
       },
 
       calculateExtremeScales: function() {
@@ -132,7 +136,14 @@ function WorkSpace() {
         
         this.maxScaleY = this.getMaxDimensionInCentimeters('height') /
           heightInCentimeters;
-
+        
+      },
+      _render: function(ctx) {
+        this.callSuper('_render', ctx);
+        ctx.font = '20px Helvetica';
+        ctx.fillStyle = '#333';
+        ctx.fillText(this.label, -this.width / 2, -this.height / 2 + 20);
+        ctx.shadowOffsetX = 1;
       },
 
       getMaxDimensionInCentimeters: function(dimension) {
@@ -156,6 +167,14 @@ function WorkSpace() {
 
       getRelativeMaxScale: function() {
         return Math.min(this.maxScaleX / this.scaleX, this.maxScaleY / this.scaleY)
+      },
+
+      getCurrentWidthInCentimeters: function() {
+        return Math.round(this.width * this.scaleX / pictureModuleConfigurator.getPixelsPerCentimeter());
+      },
+
+      getCurrentHeightInCentimeters: function() {
+        return Math.round(this.height * this.scaleY / pictureModuleConfigurator.getPixelsPerCentimeter());
       },
 
       dimensionsChanged: function() {
@@ -188,6 +207,9 @@ function WorkSpace() {
         };
 
         overrideOverstepedScales.apply(this);
+
+        this.set('label', this.getCurrentWidthInCentimeters() + 'см x ' + this.getCurrentHeightInCentimeters() +'см')
+
         this.onPictureModuleScale && this.onPictureModuleScale();
       }
     });

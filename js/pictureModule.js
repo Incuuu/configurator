@@ -86,6 +86,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
       this.maxScaleY = formerMaxScaleX;    
     };
 
+    // switching max dimension of picture module: 100x150 or 150x100
     if ((this.scaleX > this.scaleY && this.maxScaleX < this.maxScaleY) ||
       (this.scaleY > this.scaleX && this.maxScaleY < this.maxScaleX)) {
       switchMaxScaleDimensions.apply(this);

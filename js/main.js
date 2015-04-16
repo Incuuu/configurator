@@ -14,7 +14,7 @@ pictureModuleConfigurator.addPictureModule({
     top: 100,
     stroke: 'green',
     fill: 'transparent',
-    strokeWidth: 2
+    strokeWidth: 2,
   });
 
 pictureModuleConfigurator.addPictureModule({

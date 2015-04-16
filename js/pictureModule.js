@@ -7,8 +7,14 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     this.calculateExtremeScales();
     this.updateSize();
   },
+  
+  recalculateScales: function() {
+    this.calculateExtremeScales();
+    this.updateSize();
+  },
 
   calculateExtremeScales: function() {
+   
     this.minScaleX = 20 * this.scaleX / this.widthInCentimeters();
     this.minScaleY = 20 * this.scaleY / this.heightInCentimeters();
     
@@ -17,9 +23,11 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     
     this.maxScaleY = this.getMaxDimensionInCentimeters('height') /
       this.heightInCentimeters() * this.scaleY;
+
   },
 
   updateSize: function() {
+    
     this.set('label', Math.round(this.widthInCentimeters() * 10) / 10
      + 'см x ' + Math.round(this.heightInCentimeters() * 10) / 10 +'см');
   },
@@ -56,6 +64,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
   },
 
   widthInCentimeters: function() {
+    debugger;
     return this.width * this.scaleX / pictureModuleConfigurator.getPixelsPerCentimeter();
   },
 
@@ -78,6 +87,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
         this.scaleX = this.maxScaleX;
       };
     };
+
     function switchMaxScaleDimensions() {
       var formerMaxScaleX = this.maxScaleX, 
           formerMaxScaleY = this.maxScaleY;

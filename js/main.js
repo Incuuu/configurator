@@ -17,6 +17,16 @@ pictureModuleConfigurator.addPictureModule({
     strokeWidth: 2
   });
 
+pictureModuleConfigurator.addPictureModule({
+    width: 300,
+    height: 400,
+    left: 300,
+    top: 100,
+    stroke: 'green',
+    fill: 'transparent',
+    strokeWidth: 2
+  });
+
     
 })();
 

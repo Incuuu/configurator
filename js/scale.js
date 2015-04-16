@@ -3,7 +3,13 @@ function Scale(pixelsPerCentimeter) {
   
   this.setRangeElement = function(element) {
     this.view = new ScaleView(element, this);
-  }
+  };
+
+  this.changeZoomDistanceCoefficients = function(minScaleCoefficient, maxScaleCoefficient) {
+    this.maxZoomCoefficient = minScaleCoefficient;
+    this.maxDistanceCoefficient = maxScaleCoefficient;
+    this.view.render();
+  };
 
   this.changePixelsPerCentimeter = function(value) {
     this._pixelsPerCentimeter = value;
@@ -14,7 +20,6 @@ function Scale(pixelsPerCentimeter) {
 };
 
 function ScaleView(scaleViewEl, model) {
-  var _this = this;
   this.element = scaleViewEl;
   this.model = model;
   this._stepQuantity = 200;
@@ -23,10 +28,10 @@ function ScaleView(scaleViewEl, model) {
     this.model.changePixelsPerCentimeter(1 / centimetersPerPixel);
   };
 
-  scaleViewEl.addEventListener('input', function() {
-    _this.changeValue(this.value);
+  scaleViewEl.addEventListener('input', function(e) {
+    this.changeValue(e.target.value);
     pictureModuleConfigurator.canvas.renderAll();  
-  }, false);
+  }.bind(this), false);
 
   this.minValue = function() {
     return this.model.maxZoomCoefficient / this.model._pixelsPerCentimeter;

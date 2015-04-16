@@ -22,15 +22,14 @@ function WorkSpace() {
       minScale = Math.max(minScale, this.pictureModules[i].getRelativeMinScale());
       maxScale = Math.min(maxScale, this.pictureModules[i].getRelativeMaxScale());
     }
-    
+    // declared in configurator
     this.onExtremeScalesChanged && 
       this.onExtremeScalesChanged(minScale, maxScale);
   };
 
-  this.calculatePictureModulesExtremeScales = function(pixelsPerCentimeter) {
+  this.canvasScaleChanged = function() {
     for (var i = 0; i < this.pictureModules.length; i++) {
-      this.pictureModules[i].calculateExtremeScales(pixelsPerCentimeter);
-      this.pictureModules[i].updateSize();
+      this.pictureModules[i].recalculateScales();
     };    
   };
 };

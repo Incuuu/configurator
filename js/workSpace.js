@@ -1,12 +1,33 @@
 function WorkSpace() {
   this.pictureModules = [];
 
+  this.hasCollisions = function() {
+    for (var i = 0; i < this.pictureModules.length; i++) {
+      this.pictureModules[i].setCoords();
+      for (var j = i + 1; j < this.pictureModules.length; j++) {
+        this.pictureModules[j].setCoords();
+        return (this.pictureModules[i].intersectsWithObject(this.pictureModules[j])
+          || this.pictureModules[i].isContainedWithinObject(this.pictureModules[j]) 
+          || this.pictureModules[j].isContainedWithinObject(this.pictureModules[i]));
+      };
+    };
+    return false;
+  };
+
+  this.areObjectsInside = function() {
+    return true;
+  };
+
   this.createPictureModule = function(options, pixelsPerCentimeter) {
     var pictureModule = new PictureModule(options, pixelsPerCentimeter);
     
     this.pictureModules.push(pictureModule);
     this.objectDimensionsChanged();
-    
+
+    pictureModule.isAllowingToRotate = pictureModule.isAllowingToMove = pictureModule.isAllowingToScale = function() {
+      return !this.hasCollisions() && this.areObjectsInside();
+    }.bind(this); 
+
     pictureModule.onPictureModuleScale = function() { 
       this.objectDimensionsChanged();
     }.bind(this);

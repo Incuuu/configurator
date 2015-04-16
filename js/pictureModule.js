@@ -6,11 +6,28 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     this.callSuper('initialize', options);
     this.calculateExtremeScales();
     this.updateSize();
+    this.prevScaleX = this.scaleX;
+    this.prevScaleY = this.scaleY;
+    this.prevAngle = this.angle;
+    this.prevLeft = this.left;
+    this.prevTop = this.top;
   },
   
   recalculateScales: function() {
     this.calculateExtremeScales();
     this.updateSize();
+  },
+
+  isAllowingToScale: function() {
+    return true;
+  },
+
+  isAllowingToMove: function() {
+    return true;
+  },
+
+  isAllowingToRotate: function() {
+    return true;
   },
 
   calculateExtremeScales: function() {
@@ -60,28 +77,31 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
 
   widthInCentimeters: function() {
     return this.width * this.scaleX / pictureModuleConfigurator.getPixelsPerCentimeter();
-  },
+  }, 
 
   heightInCentimeters: function() {
     return this.height * this.scaleY / pictureModuleConfigurator.getPixelsPerCentimeter();
   },
 
-  dimensionsChanged: function() {
-    function overrideOverstepedScales() {
-      if (this.minScaleY > this.scaleY) {
-        this.scaleY = this.minScaleY;
-      };
-      if (this.maxScaleY < this.scaleY) {
-        this.scaleY = this.maxScaleY;
-      };
-      if (this.minScaleX > this.scaleX) {
-        this.scaleX = this.minScaleX;
-      };
-      if (this.maxScaleX < this.scaleX) {
-        this.scaleX = this.maxScaleX;
-      };
-    };
+  moved: function() {
+    if (this.isAllowingToMove()) {
+      this.prevLeft = this.left;
+      this.prevTop = this.top;
+    } else {
+      this.left = this.prevLeft;
+      this.top = this.prevTop;
+    }
+  },
 
+  rotated: function() {
+    if (this.isAllowingToRotate()) {
+      this.prevAngle = this.angle;
+    } else {
+      this.angle = this.prevAngle;
+    }
+  },
+
+  scaled: function() {
     function switchMaxScaleDimensions() {
       var formerMaxScaleX = this.maxScaleX, 
           formerMaxScaleY = this.maxScaleY;
@@ -96,8 +116,19 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
       switchMaxScaleDimensions.apply(this);
     };
 
-    overrideOverstepedScales.apply(this);
-    this.updateSize();
-    this.onPictureModuleScale && this.onPictureModuleScale();
+    var validSize = this.minScaleY < this.scaleY &&
+      this.maxScaleY > this.scaleY && this.minScaleX < this.scaleX && 
+      this.maxScaleX > this.scaleX;
+
+    if (validSize && this.isAllowingToScale()) {
+      this.prevScaleX = this.scaleX;
+      this.prevScaleY = this.scaleY;
+      this.updateSize();
+      this.onPictureModuleScale && this.onPictureModuleScale();
+
+    } else {
+      this.scaleX = this.prevScaleX;
+      this.scaleY = this.prevScaleY;
+    }
   }
 });

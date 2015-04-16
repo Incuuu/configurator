@@ -39,7 +39,15 @@ function Configurator(options) {
   }.bind(this);
   
   this.canvas.on('object:scaling', function(options) {
-    options.target.dimensionsChanged();    
+    options.target.scaled();    
+  });
+
+  this.canvas.on('object:moving', function(options) {
+    options.target.moved();
+  });
+
+  this.canvas.on('object:rotating', function(options) {
+    options.target.rotated();
   });
  
 };

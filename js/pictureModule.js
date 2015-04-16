@@ -50,11 +50,6 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     return maxDimension;
   },
 
-  calculateCurrentDimensions: function() {
-    this.currentWidth = Math.round(this.scaleX * this.width);
-    this.currentHeight = Math.round(this.scaleY * this.height);
-  },
-
   getRelativeMinScale: function() {
     return Math.max(this.minScaleX / this.scaleX, this.minScaleY / this.scaleY)
   },
@@ -64,7 +59,6 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
   },
 
   widthInCentimeters: function() {
-    debugger;
     return this.width * this.scaleX / pictureModuleConfigurator.getPixelsPerCentimeter();
   },
 

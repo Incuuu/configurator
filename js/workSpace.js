@@ -1,7 +1,19 @@
-function WorkSpace() {
-  this.pictureModules = [];
+WorkSpace = fabric.util.createClass(fabric.Rect, {
+  initialize: function(options) {
+    options || (options = { });
+    this.width = 600,
+    this.height = 600,
+    this.left = 15,
+    this.top = 15,
+    this.visible = false,
+    this.hasControls = false,
+    this.evented = false,
+    this.hasBorders = false
+  }, 
 
-  this.hasCollisions = function() {
+  pictureModules: [],
+
+  hasCollisions: function() {
     for (var i = 0; i < this.pictureModules.length; i++) {
       this.pictureModules[i].setCoords();
       for (var j = i + 1; j < this.pictureModules.length; j++) {
@@ -12,13 +24,19 @@ function WorkSpace() {
       };
     };
     return false;
-  };
+  },
 
-  this.areObjectsInside = function() {
+  areObjectsInside: function() {
+    for (var i = 0; i < this.pictureModules.length; i++) {
+      this.pictureModules[i].setCoords();
+      if (!this.pictureModules[i].isContainedWithinObject(this)) {
+        return false;
+      };
+    };
     return true;
-  };
+  },
 
-  this.createPictureModule = function(options, pixelsPerCentimeter) {
+  createPictureModule: function(options, pixelsPerCentimeter) {
     var pictureModule = new PictureModule(options, pixelsPerCentimeter);
     
     this.pictureModules.push(pictureModule);
@@ -33,9 +51,9 @@ function WorkSpace() {
     }.bind(this);
 
     return pictureModule;
-  };
+  },
 
-  this.objectDimensionsChanged = function() {
+  objectDimensionsChanged: function() {
     var minScale = 0, 
         maxScale = Infinity;
     
@@ -46,14 +64,14 @@ function WorkSpace() {
     // declared in configurator
     this.onExtremeScalesChanged && 
       this.onExtremeScalesChanged(minScale, maxScale);
-  };
+  },
 
-  this.canvasScaleChanged = function() {
+  canvasScaleChanged: function() {
     for (var i = 0; i < this.pictureModules.length; i++) {
       this.pictureModules[i].recalculateScales();
-    };    
-  };
-};
+    }    
+  }
+});
 
 
 

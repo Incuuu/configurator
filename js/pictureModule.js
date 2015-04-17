@@ -53,9 +53,9 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
   _render: function(ctx) {
     this.callSuper('_render', ctx);
     ctx.font = '20px Helvetica';
-    ctx.fillStyle = '#333';
+    ctx.fillStyle = '#FFFFFF';
     ctx.fillText(this.label, -this.width / 2, -this.height / 2 + 20);
-    ctx.shadowOffsetX = 1;
+    ctx.shadowOffsetX = 5;
   },
 
   getMaxDimensionInCentimeters: function(dimension) {

@@ -37,9 +37,10 @@ function Configurator(options) {
   this.workSpace.onExtremeScalesChanged = function(minScaleCoefficient, maxScaleCoefficient) {
     this.scale.changeZoomDistanceCoefficients(minScaleCoefficient, maxScaleCoefficient);
   }.bind(this);
+  this.canvas.add(this.workSpace)
   
   this.canvas.on('object:scaling', function(options) {
-    options.target.scaled();    
+    options.target.scaled();
   });
 
   this.canvas.on('object:moving', function(options) {

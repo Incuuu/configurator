@@ -124,14 +124,17 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     var scaleIsPositive = this.scaleX > 0 && this.scaleY > 0;
     debugger;
     if (validSize && this.isAllowingToScale() && scaleIsPositive) {
+      this.prevLeft = this.left;
+      this.prevTop = this.top;
       this.prevScaleX = this.scaleX;
       this.prevScaleY = this.scaleY;
       this.updateSize();
       this.onPictureModuleScale && this.onPictureModuleScale();
-
     } else {
       this.scaleX = this.prevScaleX;
       this.scaleY = this.prevScaleY;
+      this.left = this.prevLeft;
+      this.top = this.prevTop;
     }
   }
 });

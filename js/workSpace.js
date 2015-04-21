@@ -21,9 +21,11 @@ WorkSpace = fabric.util.createClass(fabric.Rect, {
       this.pictureModules[i].setCoords();
       for (var j = i + 1; j < this.pictureModules.length; j++) {
         this.pictureModules[j].setCoords();
-        return (this.pictureModules[i].intersectsWithObject(this.pictureModules[j])
+        if (this.pictureModules[i].intersectsWithObject(this.pictureModules[j])
           || this.pictureModules[i].isContainedWithinObject(this.pictureModules[j]) 
-          || this.pictureModules[j].isContainedWithinObject(this.pictureModules[i]));
+          || this.pictureModules[j].isContainedWithinObject(this.pictureModules[i])) {
+          return true;
+        };
       };
     };
     return false;

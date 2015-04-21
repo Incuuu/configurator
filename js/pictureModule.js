@@ -121,9 +121,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
       this.maxScaleY > this.scaleY && this.minScaleX < this.scaleX && 
       this.maxScaleX > this.scaleX;
 
-    var scaleIsPositive = this.scaleX > 0 && this.scaleY > 0;
-    debugger;
-    if (validSize && this.isAllowingToScale() && scaleIsPositive) {
+    if (validSize && this.isAllowingToScale()) {
       this.prevLeft = this.left;
       this.prevTop = this.top;
       this.prevScaleX = this.scaleX;

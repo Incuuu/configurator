@@ -1,5 +1,6 @@
 function Configurator(options) {
   this.canvas = new fabric.Canvas(options.canvas);
+  this.canvas.globalCompositeOperation = 'xor'
 	
   // resize canvas, and set background image
 
@@ -8,15 +9,15 @@ function Configurator(options) {
       width: oImg.width + 5 + 15, 
       height: oImg.height + 5 + 15
     });
-
-    this.canvas.setBackgroundImage(oImg, 
-      this.canvas.renderAll.bind(this.canvas),
-      {
-        left: 15,
-        top: 15,
-        opacity: 1
-      });
-  }.bind(this));
+  }.bind(this))
+  //   this.canvas.setBackgroundImage(oImg, 
+  //     this.canvas.renderAll.bind(this.canvas),
+  //     {
+  //       left: 15,
+  //       top: 15,
+  //       opacity: 1
+  //     });
+  // }.bind(this));
 
   this.getPixelsPerCentimeter = function() {
     return this.scale._pixelsPerCentimeter;

@@ -12,9 +12,9 @@ pictureModuleConfigurator.addPictureModule({
     height: 200,
     left: 100,
     top: 100,
-    stroke: 'green',
-    fill: 'transparent',
-    strokeWidth: 2
+    stroke: 'black',
+    globalCompositeOperation: 'xor',
+    opacity: 1
 
   });
 
@@ -23,9 +23,9 @@ pictureModuleConfigurator.addPictureModule({
     height: 230,
     left: 320,
     top: 100,
-    stroke: 'green',
-    fill: 'transparent',
-    strokeWidth: 2
+    stroke: 'black',
+    globalCompositeOperation: 'xor'
+    
   });  
 })();
 

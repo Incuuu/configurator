@@ -1,15 +1,18 @@
 WorkSpace = fabric.util.createClass(fabric.Rect, {
   initialize: function(options) {
     options || (options = { });
+    debugger;
     this.width = 600,
     this.height = 600,
-    this.left = 15,
-    this.top = 15,
-    this.visible = false,
+    this.left = 20,
+    this.top = 20,
     this.hasControls = false,
     this.evented = false,
-    this.hasBorders = false
-  }, 
+    this.hasBorders = false,
+    this.fill = 'grey',
+    this.selectable = false,
+    this.opacity = 0.9
+  },
 
   pictureModules: [],
 

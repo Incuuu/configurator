@@ -1,7 +1,7 @@
 WorkSpace = fabric.util.createClass(fabric.Rect, {
   initialize: function(options) {
-    options || (options = { });
     debugger;
+    options || (options = { });
     this.width = 600,
     this.height = 600,
     this.left = 20,
@@ -9,9 +9,9 @@ WorkSpace = fabric.util.createClass(fabric.Rect, {
     this.hasControls = false,
     this.evented = false,
     this.hasBorders = false,
-    this.fill = 'grey',
+    this.fill = 'white',
     this.selectable = false,
-    this.opacity = 0.9
+    this.opacity = 0.85
   },
 
   pictureModules: [],

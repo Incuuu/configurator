@@ -14,6 +14,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     this.lockScalingFlip = true;
     this.globalCompositeOperation ='xor';
     this.stroke = 'black';
+    this.set({ strokeWidth: 3, stroke: 'rgba(0,0,0,0.4)' })
   },
   
   recalculateScales: function() {

@@ -13,6 +13,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     this.prevTop = this.top;
     this.lockScalingFlip = true;
     this.globalCompositeOperation ='xor';
+    this.stroke = 'black';
   },
   
   recalculateScales: function() {

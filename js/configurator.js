@@ -1,6 +1,7 @@
 function Configurator(options) {
   this.canvas = new fabric.Canvas(options.canvas);
-  this.canvas.globalCompositeOperation = 'xor'
+  this.canvas.globalCompositeOperation = 'xor';
+  this.canvas.selection = false;
 	
   // resize canvas, and set background image
 

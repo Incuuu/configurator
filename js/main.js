@@ -3,6 +3,7 @@
     canvas: document.getElementById('configurator'),
     backgroundImageUrl: 'images/img3-lg.jpg',
     scaleViewEl: document.getElementById('scaleRange'),
+    hintEl: document.getElementById('hint'),
     pixelsPerCentimeter: 6
   });
 

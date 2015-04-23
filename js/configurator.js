@@ -24,8 +24,9 @@ function Configurator(options) {
     return this.scale._pixelsPerCentimeter;
   };
 
-  this.addPictureModule = function(options) {
-    var pictureModule = this.workSpace.createPictureModule(options, this.getPixelsPerCentimeter());   
+  this.addPictureModule = function(parameters) {
+    var pictureModule = this.workSpace.createPictureModule(parameters, this.getPixelsPerCentimeter());   
+    pictureModule.hint = options.hintEl;
     this.canvas.add(pictureModule);
   };
   
@@ -52,6 +53,18 @@ function Configurator(options) {
   this.canvas.on('object:rotating', function(options) {
     options.target.rotated();
   });
- 
+
+  this.canvas.on('mouse:over', function(options) {
+    var target = options.target;
+    document.onmousemove = function(e) {
+      target.mouseOvered(e);
+    };
+  });
+
+  this.canvas.on('mouse:out', function(options) {
+    debugger;
+    document.onmousemove = null;
+    options.target.mouseOuted();
+  });
 };
 

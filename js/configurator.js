@@ -26,7 +26,6 @@ function Configurator(options) {
 
   this.addPictureModule = function(parameters) {
     var pictureModule = this.workSpace.createPictureModule(parameters, this.getPixelsPerCentimeter());   
-    pictureModule.hint = options.hintEl;
     this.canvas.add(pictureModule);
   };
   
@@ -40,6 +39,7 @@ function Configurator(options) {
   this.workSpace.onExtremeScalesChanged = function(minScaleCoefficient, maxScaleCoefficient) {
     this.scale.changeZoomDistanceCoefficients(minScaleCoefficient, maxScaleCoefficient);
   }.bind(this);
+  this.workSpace.hint = options.hintEl;
   this.canvas.add(this.workSpace)
   
   this.canvas.on('object:scaling', function(options) {
@@ -55,16 +55,14 @@ function Configurator(options) {
   });
 
   this.canvas.on('mouse:over', function(options) {
-    var target = options.target;
-    document.onmousemove = function(e) {
-      target.mouseOvered(e);
-    };
-  });
+    this.canvas.on('mouse:move', function(e) {
+      options.target.mouseMovingOvered(e, options.target);  
+    });
+  }.bind(this));
 
   this.canvas.on('mouse:out', function(options) {
-    debugger;
-    document.onmousemove = null;
+    this.canvas.off('mouse:move');
     options.target.mouseOuted();
-  });
+  }.bind(this));
 };
 

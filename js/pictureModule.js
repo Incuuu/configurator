@@ -51,32 +51,18 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
   },
 
   updateSize: function() {
-    
     this.set('label', Math.round(this.widthInCentimeters() * 10) / 10
      + 'см x ' + Math.round(this.heightInCentimeters() * 10) / 10 +'см');
   },
 
-  // _render: function(ctx) {
-  //   this.callSuper('_render', ctx);
-  //   ctx.font = '20px Helvetica';
-  //   ctx.fillStyle = '#FFFFFF';
-  //   ctx.fillText(this.label, -this.width / 2, -this.height / 2 + 20);
-  //   ctx.shadowOffsetX = 5;
-  // },
-
-  mouseOvered: function(e) {
-    this.updateHint(e.pageX, e.pageY)
+  mouseMovingOvered: function(e, target) {
+    this.onPictureModuleMouseMovingOvered && 
+      this.onPictureModuleMouseMovingOvered(e, target);
   },
 
   mouseOuted: function() {
-    this.hint.style.display = 'none';
-  },
-
-  updateHint: function(leftCoord, topCoord) {
-    this.hint.innerHTML = 'Размер модуля: '+'<br>' + this.label;
-    this.hint.style.display = 'block';
-    this.hint.style.top = topCoord + 15 +'px';
-    this.hint.style.left = leftCoord + 15 +'px';
+    this.onPictureModuleMouseOuted && 
+      this.onPictureModuleMouseOuted();
   },
 
   getMaxDimensionInCentimeters: function(dimension) {

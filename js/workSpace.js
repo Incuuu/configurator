@@ -55,6 +55,14 @@ WorkSpace = fabric.util.createClass(fabric.Rect, {
       this.objectDimensionsChanged();
     }.bind(this);
 
+    pictureModule.onPictureModuleMouseMovingOvered = function(e, target) {
+      this.updateHint(e, target) 
+    }.bind(this);
+
+    pictureModule.onPictureModuleMouseOuted = function() {
+      this.hideHint();
+    }.bind(this);
+
     return pictureModule;
   },
 
@@ -75,7 +83,19 @@ WorkSpace = fabric.util.createClass(fabric.Rect, {
     for (var i = 0; i < this.pictureModules.length; i++) {
       this.pictureModules[i].recalculateScales();
     }    
+  },
+
+  updateHint: function(e, target) {
+    this.hint.innerHTML = 'Размер модуля: '+'<br>' + target.label;
+    this.hint.style.display = 'block';
+    this.hint.style.left = e.e.pageX + 15 +'px';
+    this.hint.style.top = e.e.pageY + 15 +'px';
+  },
+
+  hideHint: function() {
+    this.hint.style.display = 'none';
   }
+
 });
 
 

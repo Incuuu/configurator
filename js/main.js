@@ -9,32 +9,43 @@
 
 
 pictureModuleConfigurator.addPictureModule({
-    width: 200,
-    height: 200,
+    width: 120,
+    height: 120,
     left: 100,
     top: 100,
   });
 
 pictureModuleConfigurator.addPictureModule({
-    width: 200,
-    height: 230,
+    width: 120,
+    height: 120,
     left: 320,
-    top: 100,
+    top: 50,
+    scaleX: 1.4,
+    scaleY: 1.2
   });
 
 pictureModuleConfigurator.addPictureModule({
-    width: 210,
-    height: 230,
+    width: 120,
+    height: 120,
     left: 80,
     top: 330,
   });
 
 pictureModuleConfigurator.addPictureModule({
-    width: 180,
-    height: 150,
+    width: 120,
+    height: 120,
     left: 340,
     top: 360,
-  });          
+    scaleX: 1.2,
+    scaleY: 2
+  });  
+pictureModuleConfigurator.addPictureModule({
+    width: 120,
+    height: 120,
+    left: 400,
+    top: 220,
+    scaleX: 1.7
+});        
 })();
 
  

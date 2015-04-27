@@ -47,7 +47,8 @@ WorkSpace = fabric.util.createClass(fabric.Rect, {
     this.objectDimensionsChanged();
 
     pictureModule.isAllowingToRotate = pictureModule.isAllowingToMove = pictureModule.isAllowingToScale = function() {
-      return !this.hasCollisions() && this.areObjectsInside();
+      // !this.hasCollisions() && 
+      return this.areObjectsInside();    
     }.bind(this); 
 
     pictureModule.onPictureModuleScale = function() { 

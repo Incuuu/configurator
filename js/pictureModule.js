@@ -42,7 +42,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
    
     this.minScaleX = 20 * this.scaleX / this.widthInCentimeters();
     this.minScaleY = 20 * this.scaleY / this.heightInCentimeters();
-    
+
     this.maxScaleX = this.getMaxDimensionInCentimeters('width') / 
       this.widthInCentimeters() * this.scaleX;
     

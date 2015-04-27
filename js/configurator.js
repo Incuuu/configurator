@@ -61,7 +61,6 @@ function Configurator(options) {
   }.bind(this));
 
   this.canvas.on('mouse:out', function(options) {
-    console.log('work_out')
     this.canvas.off('mouse:move');
     options.target.mouseLeft();
   }.bind(this));

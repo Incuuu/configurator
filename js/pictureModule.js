@@ -17,6 +17,7 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     this.set({ strokeWidth: 3, stroke: 'rgba(0,0,0,0.4)' });
     this.cornerColor = 'grey';
     this.cornerSize = 15;
+    this.perPixelTargetFind = true;
 
   },
   
@@ -55,14 +56,14 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
      + 'см x ' + Math.round(this.heightInCentimeters() * 10) / 10 +'см');
   },
 
-  mouseMovingOvered: function(e, target) {
-    this.onPictureModuleMouseMovingOvered && 
-      this.onPictureModuleMouseMovingOvered(e, target);
+  innerMouseMoving: function(e, target) {
+    this.onPictureModuleInnerMouseMoving && 
+      this.onPictureModuleInnerMouseMoving(e, target);
   },
 
-  mouseOuted: function() {
-    this.onPictureModuleMouseOuted && 
-      this.onPictureModuleMouseOuted();
+  mouseLeft: function() {
+    this.onPictureModuleMouseLeft && 
+      this.onPictureModuleMouseLeft();
   },
 
   getMaxDimensionInCentimeters: function(dimension) {

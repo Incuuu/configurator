@@ -56,13 +56,14 @@ function Configurator(options) {
 
   this.canvas.on('mouse:over', function(options) {
     this.canvas.on('mouse:move', function(e) {
-      options.target.mouseMovingOvered(e, options.target);  
+      options.target.innerMouseMoving(e, options.target);  
     });
   }.bind(this));
 
   this.canvas.on('mouse:out', function(options) {
+    console.log('work_out')
     this.canvas.off('mouse:move');
-    options.target.mouseOuted();
+    options.target.mouseLeft();
   }.bind(this));
 };
 

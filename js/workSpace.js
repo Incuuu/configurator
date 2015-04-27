@@ -1,6 +1,5 @@
 WorkSpace = fabric.util.createClass(fabric.Rect, {
   initialize: function(options) {
-    debugger;
     options || (options = { });
     this.width = 600,
     this.height = 600,
@@ -55,11 +54,11 @@ WorkSpace = fabric.util.createClass(fabric.Rect, {
       this.objectDimensionsChanged();
     }.bind(this);
 
-    pictureModule.onPictureModuleMouseMovingOvered = function(e, target) {
+    pictureModule.onPictureModuleInnerMouseMoving = function(e, target) {
       this.updateHint(e, target) 
     }.bind(this);
 
-    pictureModule.onPictureModuleMouseOuted = function() {
+    pictureModule.onPictureModuleMouseLeft = function() {
       this.hideHint();
     }.bind(this);
 

@@ -33,6 +33,7 @@ function Configurator(options) {
   this.scale.setRangeElement(options.scaleViewEl);
   this.scale.onValueChange = function(pixelsPerCentimeter) {
     this.workSpace.canvasScaleChanged();
+    this.rulers.canvasScaleChanged();
   }.bind(this);
   
   this.workSpace = new WorkSpace();
@@ -41,6 +42,8 @@ function Configurator(options) {
   }.bind(this);
   this.workSpace.hint = options.hintEl;
   this.canvas.add(this.workSpace)
+
+  this.rulers = new Rulers();
   
   this.canvas.on('object:scaling', function(options) {
     options.target.scaled();

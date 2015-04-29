@@ -1,13 +1,10 @@
-  canvas {
-    border: 1px solid #000;
-  }
   .canvas-container {
     display: inline-block;
   }
   .background {
     position: absolute; 
-    top: 29px; 
-    left: 333px;
+    top: 63px;
+    left: 367px;
     -webkit-filter: brightness(1.1);
     filter: brightness(1.1);
 

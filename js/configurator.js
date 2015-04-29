@@ -7,8 +7,8 @@ function Configurator(options) {
 
   fabric.Image.fromURL(options.backgroundImageUrl, function(oImg) {
     this.canvas.setDimensions({
-      width: oImg.width + 5 + 15, 
-      height: oImg.height + 5 + 15
+      width: oImg.width + 5 + 100, 
+      height: oImg.height + 5 + 100
     });
   }.bind(this))
   //   this.canvas.setBackgroundImage(oImg, 
@@ -28,12 +28,21 @@ function Configurator(options) {
     var pictureModule = this.workSpace.createPictureModule(parameters, this.getPixelsPerCentimeter());   
     this.canvas.add(pictureModule);
   };
+
+  this.updateRulers = function() {
+    this.canvas.remove(this.rulers.prevCanvasObjects);
+    this.rulers.recalculateDimensions();
+    this.canvas.add(this.rulers.getCanvasObjects());
+  };
   
+  this.rulers = new Rulers();
+  this.canvas.add(this.rulers.getCanvasObjects());
+
   this.scale = new Scale(options.pixelsPerCentimeter);
   this.scale.setRangeElement(options.scaleViewEl);
   this.scale.onValueChange = function(pixelsPerCentimeter) {
     this.workSpace.canvasScaleChanged();
-    this.rulers.canvasScaleChanged();
+    this.updateRulers();
   }.bind(this);
   
   this.workSpace = new WorkSpace();
@@ -41,9 +50,8 @@ function Configurator(options) {
     this.scale.changeZoomDistanceCoefficients(minScaleCoefficient, maxScaleCoefficient);
   }.bind(this);
   this.workSpace.hint = options.hintEl;
-  this.canvas.add(this.workSpace)
-
-  this.rulers = new Rulers();
+ 
+  this.canvas.add(this.workSpace);
   
   this.canvas.on('object:scaling', function(options) {
     options.target.scaled();

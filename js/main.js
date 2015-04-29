@@ -19,7 +19,7 @@ pictureModuleConfigurator.addPictureModule({
     width: 120,
     height: 120,
     left: 320,
-    top: 50,
+    top: 60,
     scaleX: 1.4,
     scaleY: 1.2
   });

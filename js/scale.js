@@ -15,7 +15,6 @@ function Scale(pixelsPerCentimeter) {
     this._pixelsPerCentimeter = value;
     // declared in configurator
     this.onValueChange(value);
-    // this.view.render();
   };
 };
 

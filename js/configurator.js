@@ -3,22 +3,14 @@ function Configurator(options) {
   this.canvas.globalCompositeOperation = 'xor';
   this.canvas.selection = false;
 	
-  // resize canvas, and set background image
+  // resize canvas
 
   fabric.Image.fromURL(options.backgroundImageUrl, function(oImg) {
     this.canvas.setDimensions({
       width: oImg.width + 5 + 100, 
       height: oImg.height + 5 + 100
     });
-  }.bind(this))
-  //   this.canvas.setBackgroundImage(oImg, 
-  //     this.canvas.renderAll.bind(this.canvas),
-  //     {
-  //       left: 15,
-  //       top: 15,
-  //       opacity: 1
-  //     });
-  // }.bind(this));
+  }.bind(this));
 
   this.getPixelsPerCentimeter = function() {
     return this.scale._pixelsPerCentimeter;

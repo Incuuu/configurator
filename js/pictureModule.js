@@ -3,6 +3,8 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
 
   initialize: function(options, pixelsPerCentimeter) {
     options || (options = { });
+    this.width = 120,
+    this.height = 120,
     this.callSuper('initialize', options);
     this.calculateExtremeScales();
     this.updateSize();
@@ -18,7 +20,6 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
     this.cornerColor = 'grey';
     this.cornerSize = 15;
     this.perPixelTargetFind = true;
-
   },
   
   recalculateScales: function() {
@@ -77,11 +78,11 @@ PictureModule = fabric.util.createClass(fabric.Rect, {
   },
 
   getRelativeMinScale: function() {
-    return Math.max(this.minScaleX / this.scaleX, this.minScaleY / this.scaleY)
+    return Math.max(this.minScaleX / this.scaleX, this.minScaleY / this.scaleY);
   },
 
   getRelativeMaxScale: function() {
-    return Math.min(this.maxScaleX / this.scaleX, this.maxScaleY / this.scaleY)
+    return Math.min(this.maxScaleX / this.scaleX, this.maxScaleY / this.scaleY);
   },
 
   widthInCentimeters: function() {

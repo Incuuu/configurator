@@ -1,6 +1,6 @@
 function Rulers() {
   this.view = new RulersView(this);
-  this.centimetersPerIntervalArray = [4, 5, 10, 20, 25, 50];
+  this.centimetersPerIntervalArray = [4, 5, 10, 20, 25, 50, 100, 150];
   this.centimetersPerIntervalValue = 10;
   this.pixelsPerIntervalValue = 60;
 
@@ -19,10 +19,7 @@ function Rulers() {
         len = this.centimetersPerIntervalArray.length;
     
     for (var i = 0; i < len; i++) { 
-      if (len - i === 1) {
-        this.centimetersPerIntervalValue = this.centimetersPerIntervalArray[len - 1];
-      };
-
+      
       if (maxRulersValueInCentimeters / 
         this.centimetersPerIntervalArray[i] < this.ABSTRACT_INTERVAL_QUANTITY) {
         this.centimetersPerIntervalValue = this.centimetersPerIntervalArray[i];

@@ -1,7 +1,7 @@
 (function() {
     pictureModuleConfigurator = new Configurator({
     canvas: document.getElementById('configurator'),
-    backgroundImageUrl: 'images/img3-lg.jpg',
+    backgroundImageUrl: document.getElementById('background').src,
     scaleViewEl: document.getElementById('scaleRange'),
     hintEl: document.getElementById('hint'),
     pixelsPerCentimeter: 6

@@ -1,19 +1,23 @@
-function Scale(pixelsPerCentimeter) {
-  this._pixelsPerCentimeter = pixelsPerCentimeter || 6;
+define(['../lib/fabric.require', 'Views/scaleView'], function (fabric, ScaleView) {
 
-  this.setRangeElement = function(element) {
-    this.view = new ScaleView(element, this);
-  };
+  function Scale(pixelsPerCentimeter) {
+    this._pixelsPerCentimeter = pixelsPerCentimeter || 6;
 
-  this.changeZoomDistanceCoefficients = function(minScaleCoefficient, maxScaleCoefficient) {
-    this.maxZoomCoefficient = minScaleCoefficient;
-    this.maxDistanceCoefficient = maxScaleCoefficient;
-    this.view.render();
-  };
+    this.setRangeElement = function(element) {
+      this.view = new ScaleView(element, this);
+    };
 
-  this.changePixelsPerCentimeter = function(value) {
-    this._pixelsPerCentimeter = value;
-    // declared in configurator
-    this.onValueChange(value);
+    this.changeZoomDistanceCoefficients = function(minScaleCoefficient, maxScaleCoefficient) {
+      this.maxZoomCoefficient = minScaleCoefficient;
+      this.maxDistanceCoefficient = maxScaleCoefficient;
+      this.view.render();
+    };
+
+    this.changePixelsPerCentimeter = function(value) {
+      this._pixelsPerCentimeter = value;
+      // declared in configurator
+      this.onValueChange(value);
+    };
   };
-};
+  return Scale
+});

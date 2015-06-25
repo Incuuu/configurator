@@ -2,8 +2,6 @@ define(['../lib/fabric.require', 'scale', 'rulers', 'workSpace'], function (fabr
 
   function Configurator(options) {
 
-    Configurator.configurator = this;
-
     this.canvas = new fabric.Canvas(options.canvas);
     this.canvas.globalCompositeOperation = 'xor';
     this.canvas.selection = false;
@@ -79,5 +77,3 @@ define(['../lib/fabric.require', 'scale', 'rulers', 'workSpace'], function (fabr
 
   return Configurator
 });
-
-

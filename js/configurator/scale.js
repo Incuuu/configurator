@@ -1,4 +1,4 @@
-define(['../lib/fabric.require', 'Views/scaleView'], function (fabric, ScaleView) {
+define(['fabric', 'scaleView'], function (fabric, ScaleView) {
 
   function Scale(pixelsPerCentimeter) {
     this._pixelsPerCentimeter = pixelsPerCentimeter || 6;

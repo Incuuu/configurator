@@ -1,4 +1,4 @@
-define(['../lib/fabric.require', 'Views/rulersView'], function (fabric, RulersView) {
+define(['fabric', 'rulersView'], function (fabric, RulersView) {
 
   function Rulers() {
     this.view = new RulersView(this);

@@ -1,4 +1,4 @@
-define(['../lib/fabric.require', 'pictureModule', 'configurator'], function (fabric, PictureModule, Configurator) {
+define(['fabric', 'pictureModule'], function (fabric, PictureModule) {
 
   var WorkSpace = fabric.util.createClass(fabric.Rect, {
     initialize: function(options) {

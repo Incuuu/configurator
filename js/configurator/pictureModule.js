@@ -1,4 +1,4 @@
-define(['../lib/fabric.require'], function (fabric) {
+define(['fabric'], function (fabric) {
 
   var PictureModule = fabric.util.createClass(fabric.Rect, {
     type: 'pictureModule',

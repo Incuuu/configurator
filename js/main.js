@@ -1,11 +1,15 @@
 (function() {
 
   requirejs.config({
-      baseUrl: "js/configurator"
+      baseUrl: "js/configurator",
+      paths: {
+        fabric: "../lib/fabric.require",
+        scaleView: "Views/scaleView",
+        rulersView: "Views/rulersView"
+      }
   });
 
   require(['configurator'], function(Configurator) {
-
       pictureModuleConfigurator = new Configurator({
       canvas: document.getElementById('configurator'),
       backgroundImageUrl: document.getElementById('background').src,

@@ -1,4 +1,4 @@
-define(['../lib/fabric.require', 'scale', 'rulers', 'workSpace'], function (fabric, Scale, Rulers, WorkSpace) {
+define(['fabric', 'scale', 'rulers', 'workSpace'], function (fabric, Scale, Rulers, WorkSpace) {
 
   function Configurator(options) {
 

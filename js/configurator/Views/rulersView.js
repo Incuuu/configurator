@@ -1,4 +1,4 @@
-define(['../../lib/fabric.require'], function (fabric) {
+define(['fabric'], function (fabric) {
 
   function RulersView(model) {
     this.model = model;

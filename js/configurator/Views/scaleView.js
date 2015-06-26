@@ -35,5 +35,4 @@ define(function() {
   };
 
   return ScaleView
-
 })

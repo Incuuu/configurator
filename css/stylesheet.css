@@ -1,26 +1,27 @@
-  .canvas-container {
-    display: inline-block;
-  }
-  .background {
-    position: absolute; 
-    top: 63px;
-    left: 367px;
-    -webkit-filter: brightness(1.1);
-    filter: brightness(1.1);
+.canvas-container {
+  display: inline-block;
+}
 
-  }
-  .settings {
-  	display: inline-block;
-  	width: 300px;
-  	vertical-align: top;
-  }
+.background {
+  position: absolute;
+  top: 63px;
+  left: 367px;
+  -webkit-filter: brightness(1.1);
+  filter: brightness(1.1);
+}
 
-  .hint {
-    position: absolute;
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px;
-    border-radius: 8px;
-    display: none;
-  }
+.settings {
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+
+.hint {
+  position: absolute;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  display: none;
+}

@@ -107,5 +107,6 @@ define(['fabric'], function (fabric) {
       return container.add(mainRulersLine)
     };
   };
+
   return RulersView
 });

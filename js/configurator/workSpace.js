@@ -102,6 +102,3 @@ define(['fabric', 'pictureModule'], function (fabric, PictureModule) {
 
   return WorkSpace
 });
-
-
-

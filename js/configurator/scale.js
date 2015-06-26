@@ -19,5 +19,6 @@ define(['fabric', 'scaleView'], function (fabric, ScaleView) {
       this.onValueChange(value);
     };
   };
+
   return Scale
 });
